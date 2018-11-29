@@ -2,8 +2,16 @@ package net.alexandroid.utils.taboolatest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.taboola.android.TaboolaWidget;
+import net.alexandroid.utils.taboolatest.model.Component;
+import net.alexandroid.utils.taboolatest.model.InfiniteTaboolaComp;
+import net.alexandroid.utils.taboolatest.model.OtherComp;
+import net.alexandroid.utils.taboolatest.model.HomeTaboolaComp;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,19 +19,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTaboolaWidget();
+        setRecyclerView();
     }
 
-    private void setTaboolaWidget() {
-        TaboolaWidget taboolaWidget = findViewById(R.id.taboolaWidget);
+    private void setRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new RecyclerViewAdapter(gerListWithData(), this));
+    }
 
-        taboolaWidget.setPublisher("sdk-tester")
-                .setMode("thumbs-feed-01")
-                .setPlacement("Feed without video")
-                .setPageType("article")
-                .setPageUrl("https://www.ynet.co.il/articles/0,7340,L-5411684,00.html")
-                .setTargetType("mix");
-
-        taboolaWidget.fetchContent();
+    private List<Component> gerListWithData() {
+        ArrayList<Component> list = new ArrayList<>();
+        list.add(new OtherComp("0"));
+        list.add(new OtherComp("1"));
+        list.add(new OtherComp("2"));
+        list.add(new OtherComp("3"));
+        list.add(new HomeTaboolaComp());
+        list.add(new OtherComp("5"));
+        list.add(new OtherComp("6"));
+        list.add(new OtherComp("7"));
+        list.add(new OtherComp("8"));
+        list.add(new OtherComp("9"));
+        list.add(new InfiniteTaboolaComp());
+        return list;
     }
 }
