@@ -64,10 +64,10 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (getItemViewType(position)) {
             case TYPE_HOME_TABOOLA:
-                mHomeTaboolaView.getContent();
+                //mHomeTaboolaView.getContent();
                 break;
             case TYPE_INFINITE_TABOOLA:
-                mInfiniteTaboolaView.getContent();
+                //mInfiniteTaboolaView.getContent();
                 break;
             default:
                 OtherViewHolder otherViewHolder = (OtherViewHolder) holder;

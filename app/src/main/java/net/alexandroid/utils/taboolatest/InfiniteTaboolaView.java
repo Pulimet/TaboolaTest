@@ -46,6 +46,7 @@ public class InfiniteTaboolaView extends TaboolaWidget {
             }
         });
 
+        getContent();
     }
 
     public void getContent() {

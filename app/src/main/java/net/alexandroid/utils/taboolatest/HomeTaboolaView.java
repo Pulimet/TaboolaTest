@@ -47,6 +47,7 @@ public class HomeTaboolaView extends TaboolaWidget {
             }
         });
 
+        getContent();
     }
 
     public void getContent() {
