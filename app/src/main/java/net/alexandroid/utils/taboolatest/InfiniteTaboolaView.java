@@ -1,39 +1,35 @@
 package net.alexandroid.utils.taboolatest;
 
 import android.content.Context;
-import android.util.AttributeSet;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.taboola.android.TaboolaWidget;
 import com.taboola.android.listeners.TaboolaEventListener;
+import com.taboola.android.utils.SdkDetailsHelper;
 
 public class InfiniteTaboolaView extends TaboolaWidget {
 
-    private boolean isGetContentCalled;
-
     public InfiniteTaboolaView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
-    public InfiniteTaboolaView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
+    protected void init(Context context) {
 
-    public InfiniteTaboolaView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init();
-    }
+        int height = SdkDetailsHelper.getDisplayHeight(context);
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        setLayoutParams(params);
 
-    protected void init() {
         setPublisher("ynet-ynet-app");
         setMode("thumbnails-a");
         setPlacement("Below Article Feed SDK");
         setTargetType("mix");
         setPageUrl("https://www.ynet.co.il");
         setPageType("article");
-        setAutoResizeHeight(true);
-        setScrollEnabled(false); //It is a default value but I added it to make it clear
+        //setAutoResizeHeight(true);
+        setInterceptScroll(true);
+        //setScrollEnabled(false); //It is a default value but I added it to make it clear
 
         setTaboolaEventListener(new TaboolaEventListener() {
             @Override
@@ -46,14 +42,7 @@ public class InfiniteTaboolaView extends TaboolaWidget {
             }
         });
 
-        getContent();
-    }
-
-    public void getContent() {
-        if (!isGetContentCalled) {
-            isGetContentCalled = true;
-            fetchContent();
-        }
+        fetchContent();
     }
 
 }

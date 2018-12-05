@@ -1,14 +1,14 @@
 package net.alexandroid.utils.taboolatest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import net.alexandroid.utils.taboolatest.model.Component;
+import net.alexandroid.utils.taboolatest.model.HomeTaboolaComp;
 import net.alexandroid.utils.taboolatest.model.InfiniteTaboolaComp;
 import net.alexandroid.utils.taboolatest.model.OtherComp;
-import net.alexandroid.utils.taboolatest.model.HomeTaboolaComp;
 
 import java.util.ArrayList;
 import java.util.List;
