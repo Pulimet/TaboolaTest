@@ -21,13 +21,13 @@ import java.util.List;
 
 class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public static final int TYPE_OTHER = 0;
-    public static final int TYPE_HOME_TABOOLA = 1;
-    public static final int TYPE_INFINITE_TABOOLA = 2;
+    private static final int TYPE_OTHER = 0;
+    private static final int TYPE_HOME_TABOOLA = 1;
+    private static final int TYPE_INFINITE_TABOOLA = 2;
 
     private List<Component> data;
 
-    public RecyclerViewAdapter(List<Component> list) {
+    RecyclerViewAdapter(List<Component> list) {
         data = list;
     }
 
@@ -77,18 +77,18 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public static class TaboolaViewHolder extends RecyclerView.ViewHolder {
-        public TaboolaWidget mTaboolaWidget;
+        TaboolaWidget mTaboolaWidget;
 
-        public TaboolaViewHolder(@NonNull View itemView) {
+        TaboolaViewHolder(@NonNull View itemView) {
             super(itemView);
             mTaboolaWidget = (TaboolaWidget) itemView;
         }
     }
 
     public static class OtherViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextView;
+        TextView mTextView;
 
-        public OtherViewHolder(@NonNull View itemView) {
+        OtherViewHolder(@NonNull View itemView) {
             super(itemView);
             mTextView = (TextView) itemView;
         }
