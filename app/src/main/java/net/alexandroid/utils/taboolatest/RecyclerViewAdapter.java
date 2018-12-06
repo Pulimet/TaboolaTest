@@ -6,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.taboola.android.TaboolaWidget;
+import com.taboola.android.utils.SdkDetailsHelper;
 
 import net.alexandroid.utils.taboolatest.model.Component;
 import net.alexandroid.utils.taboolatest.model.HomeTaboolaComp;
@@ -45,9 +47,9 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         switch (viewType) {
             case TYPE_HOME_TABOOLA:
-                return new TaboolaViewHolder(new HomeTaboolaView(viewGroup.getContext()));
+                return new TaboolaViewHolder(createMiddleTaboolaView(viewGroup.getContext()));
             case TYPE_INFINITE_TABOOLA:
-                return new TaboolaViewHolder(new InfiniteTaboolaView(viewGroup.getContext()));
+                return new TaboolaViewHolder(createInfiniteTaboolaView(viewGroup.getContext()));
             default:
                 View otherView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.item_other, viewGroup, false);
@@ -90,5 +92,44 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             mTextView = (TextView) itemView;
         }
+    }
+
+    static void buildTaboolaWidget(Context context, TaboolaWidget taboolaWidget, boolean infiniteWidget) {
+        final int displayHeight = SdkDetailsHelper.getDisplayHeight(context);
+        int height = infiniteWidget ? displayHeight * 2 : displayHeight;
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        taboolaWidget.setLayoutParams(params);
+
+        if (infiniteWidget) {
+            taboolaWidget.setInterceptScroll(true);
+        }
+        taboolaWidget.fetchContent();
+    }
+
+    static TaboolaWidget createInfiniteTaboolaView(Context context) {
+        TaboolaWidget taboolaWidget = new TaboolaWidget(context);
+        taboolaWidget
+                .setPageType("article")
+                .setPageUrl("https://www.ynet.co.il")
+                .setMode("thumbnails-a")
+                .setPlacement("Below Article Feed SDK")
+                .setTargetType("mix")
+                .setPublisher("ynet-ynet-app");
+        buildTaboolaWidget(context, taboolaWidget, true);
+        return taboolaWidget;
+
+    }
+
+    static TaboolaWidget createMiddleTaboolaView(Context context) {
+        TaboolaWidget taboolaWidget = new TaboolaWidget(context);
+        taboolaWidget
+                .setPageType("article")
+                .setPageUrl("https://www.ynet.co.il")
+                .setMode("alternating-thumbnails-sdk")
+                .setPlacement("Below Article Thumbnails SDK")
+                .setTargetType("mix")
+                .setPublisher("ynet-ynet-app");
+        buildTaboolaWidget(context, taboolaWidget, false);
+        return taboolaWidget;
     }
 }
