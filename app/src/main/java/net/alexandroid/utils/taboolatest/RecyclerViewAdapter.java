@@ -27,7 +27,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private List<Component> data;
 
-    public RecyclerViewAdapter(List<Component> list, Context context) {
+    public RecyclerViewAdapter(List<Component> list) {
         data = list;
     }
 
@@ -94,19 +94,20 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    static void buildTaboolaWidget(Context context, TaboolaWidget taboolaWidget, boolean infiniteWidget) {
-        final int displayHeight = SdkDetailsHelper.getDisplayHeight(context);
-        int height = infiniteWidget ? displayHeight * 2 : displayHeight;
-        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
-        taboolaWidget.setLayoutParams(params);
-
-        if (infiniteWidget) {
-            taboolaWidget.setInterceptScroll(true);
-        }
-        taboolaWidget.fetchContent();
+    private static TaboolaWidget createMiddleTaboolaView(Context context) {
+        TaboolaWidget taboolaWidget = new TaboolaWidget(context);
+        taboolaWidget
+                .setPageType("article")
+                .setPageUrl("https://www.ynet.co.il")
+                .setMode("alternating-thumbnails-sdk")
+                .setPlacement("Below Article Thumbnails SDK")
+                .setTargetType("mix")
+                .setPublisher("ynet-ynet-app");
+        buildTaboolaWidget(context, taboolaWidget, false);
+        return taboolaWidget;
     }
 
-    static TaboolaWidget createInfiniteTaboolaView(Context context) {
+    private static TaboolaWidget createInfiniteTaboolaView(Context context) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
         taboolaWidget
                 .setPageType("article")
@@ -120,16 +121,15 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-    static TaboolaWidget createMiddleTaboolaView(Context context) {
-        TaboolaWidget taboolaWidget = new TaboolaWidget(context);
-        taboolaWidget
-                .setPageType("article")
-                .setPageUrl("https://www.ynet.co.il")
-                .setMode("alternating-thumbnails-sdk")
-                .setPlacement("Below Article Thumbnails SDK")
-                .setTargetType("mix")
-                .setPublisher("ynet-ynet-app");
-        buildTaboolaWidget(context, taboolaWidget, false);
-        return taboolaWidget;
+    private static void buildTaboolaWidget(Context context, TaboolaWidget taboolaWidget, boolean infiniteWidget) {
+        final int displayHeight = SdkDetailsHelper.getDisplayHeight(context);
+        int height = infiniteWidget ? displayHeight * 2 : displayHeight;
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        taboolaWidget.setLayoutParams(params);
+
+        if (infiniteWidget) {
+            taboolaWidget.setInterceptScroll(true);
+        }
+        taboolaWidget.fetchContent();
     }
 }

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecyclerViewAdapter(gerListWithData(), this));
+        recyclerView.setAdapter(new RecyclerViewAdapter(gerListWithData()));
     }
 
     private List<Component> gerListWithData() {
