@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecyclerViewAdapter(gerListWithData()));
+        recyclerView.setAdapter(new RecyclerViewAdapter(this, getListWithData()));
     }
 
-    private List<Component> gerListWithData() {
+    private List<Component> getListWithData() {
         ArrayList<Component> list = new ArrayList<>();
         list.add(new OtherComp("0"));
         list.add(new OtherComp("1"));

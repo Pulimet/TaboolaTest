@@ -25,10 +25,15 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int TYPE_HOME_TABOOLA = 1;
     private static final int TYPE_INFINITE_TABOOLA = 2;
 
+    private final TaboolaWidget mInfiniteTaboolaView;
+    private final TaboolaWidget mMiddleTaboolaView;
+
     private List<Component> data;
 
-    RecyclerViewAdapter(List<Component> list) {
+    RecyclerViewAdapter(Context ctx, List<Component> list) {
         data = list;
+        mMiddleTaboolaView = createMiddleTaboolaView(ctx);
+        mInfiniteTaboolaView = createInfiniteTaboolaView(ctx);
     }
 
     @Override
@@ -47,9 +52,9 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         switch (viewType) {
             case TYPE_HOME_TABOOLA:
-                return new TaboolaViewHolder(createMiddleTaboolaView(viewGroup.getContext()));
+                return new TaboolaViewHolder(mMiddleTaboolaView);
             case TYPE_INFINITE_TABOOLA:
-                return new TaboolaViewHolder(createInfiniteTaboolaView(viewGroup.getContext()));
+                return new TaboolaViewHolder(mInfiniteTaboolaView);
             default:
                 View otherView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.item_other, viewGroup, false);
