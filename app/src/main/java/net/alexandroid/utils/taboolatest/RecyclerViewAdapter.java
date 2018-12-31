@@ -102,10 +102,10 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static TaboolaWidget createMiddleTaboolaView(Context context) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
         taboolaWidget
-                .setPageType("article")
+                .setPageType("home")
                 .setPageUrl("https://www.ynet.co.il")
                 .setMode("alternating-thumbnails-sdk")
-                .setPlacement("Below Article Thumbnails SDK")
+                .setPlacement("Mid Home Page")
                 .setTargetType("mix")
                 .setPublisher("ynet-ynet-app");
         buildTaboolaWidget(context, taboolaWidget, false);
@@ -115,10 +115,10 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static TaboolaWidget createInfiniteTaboolaView(Context context) {
         TaboolaWidget taboolaWidget = new TaboolaWidget(context);
         taboolaWidget
-                .setPageType("article")
+                .setPageType("home")
                 .setPageUrl("https://www.ynet.co.il")
-                .setMode("thumbnails-a")
-                .setPlacement("Below Article Feed SDK")
+                .setMode("alternating-thumbnails-sdk")
+                .setPlacement("Below Article Feed Home SDK")
                 .setTargetType("mix")
                 .setPublisher("ynet-ynet-app");
         buildTaboolaWidget(context, taboolaWidget, true);
@@ -128,7 +128,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private static void buildTaboolaWidget(Context context, TaboolaWidget taboolaWidget, boolean infiniteWidget) {
         final int displayHeight = SdkDetailsHelper.getDisplayHeight(context);
-        int height = infiniteWidget ? displayHeight * 2 : displayHeight;
+        int height = infiniteWidget ? displayHeight * 2 : ViewGroup.LayoutParams.WRAP_CONTENT;
         ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
         taboolaWidget.setLayoutParams(params);
 
